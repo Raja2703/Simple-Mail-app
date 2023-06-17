@@ -28,31 +28,36 @@
 			</ul>
 		</div>
 		
-		<!-- inbox -->
-		<form class="ml-2 w-10/12 h-screen border-2 rounded-md mt-5 mr-3 bg-white" action="getMessageServlet" method="post">
-			<ul>
+		<!-- message -->
+		<div class="ml-2 w-10/12 h-screen border-2 rounded-md mt-5 mr-3 bg-white">
+			<div>
 				<%
 					HttpSession sessionObj = request.getSession();
-					List<Map<String,Object>> outerList = (List<Map<String,Object>>) sessionObj.getAttribute("list");
-					for(int i=0;i<outerList.size();i++){
-						Map<String,Object> inboxMsg = outerList.get(i);
-						int mid = (int) inboxMsg.get("mid");
-						String sender_email = (String) inboxMsg.get("sender_email");
-						Timestamp sent_date =  (Timestamp) inboxMsg.get("sent_date");
-						SimpleDateFormat sdf = new SimpleDateFormat("MMM dd");
-						String str_date = sdf.format(sent_date);
-						String subject = (String) inboxMsg.get("subject");
-						String body = (String) inboxMsg.get("body");
-						String recepient_email = (String) inboxMsg.get("recepient_email");
+					Map<String,Object> msg = (Map<String,Object>) request.getAttribute("msg");
+					int mid = (int) msg.get("mid");
+					String sender_email = (String) msg.get("sender_email");
+					Timestamp sent_date =  (Timestamp) msg.get("sent_date");
+					SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy, HH:mm a");
+					String str_date = sdf.format(sent_date);
+					String subject = (String) msg.get("subject");
+					String body = (String) msg.get("body");
+					String recepient_email = (String) msg.get("recepient_email");
 				%>
-				<button class="w-full p-2 border-b border-gray-300 bg-zinc-200 flex" type="submit" value=<%=mid %> name="btn">
-					<p class="w-25% mr-4"><%=sender_email %></p>
-					<p class="w-70% mx-4"><%=subject %> - <%=body.substring(0,30) %>  .......</p>
-					<p class="w-5% flex-auto text-end"><%=str_date %></p>
-				</button>
-				<% } %>
-			</ul>
-		</form>
+				<h1 class="px-16 pt-3"><%=subject %></h1>
+				<div class="flex justify-between p-4">
+					<div class="flex">
+						<img class="w-10 h-10 mr-2" src="https://static.vecteezy.com/system/resources/previews/005/544/718/original/profile-icon-design-free-vector.jpg">
+						<div>
+							<h3><%=sender_email %></h3>
+							<h3 class="text-xs"><%=recepient_email %></h3>
+						</div>
+					</div>	
+					<div><%=str_date %></div>
+				</div>
+				<hr>
+				<div class="px-16 pt-4"><%=body %></div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

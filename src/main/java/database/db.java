@@ -7,13 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-<<<<<<< HEAD
 import java.util.List;
-=======
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
->>>>>>> 777a2f7 (inbox messages displayed successfully)
 
 public class db {
 	Connection con;
@@ -75,17 +72,14 @@ public class db {
 			ps1 = con.prepareStatement("insert into message values(?,?,?,?,?,?);");
 			ps1.setInt(1, mid);
 			ps1.setString(2, senderName);
-<<<<<<< HEAD
 			ps1.setString(3, recepientEmail);
 			ps1.setTimestamp(4, sent_date);
 			ps1.setString(5, subject);
 			ps1.setString(6, body);
-=======
 			ps1.setTimestamp(3, sent_date);
 			ps1.setString(4, subject);
 			ps1.setString(5, body);
 			ps1.setString(6, recepientEmail);
->>>>>>> 777a2f7 (inbox messages displayed successfully)
 			ps1.addBatch();
 			
 			ps2 = con.prepareStatement("insert into inbox values(?,?,?,?,?,?);");
@@ -113,50 +107,21 @@ public class db {
 	
 	@SuppressWarnings("finally")
 	public List getInboxMessages(String user_email) throws SQLException {
-<<<<<<< HEAD
-		List<Object> outerList = new ArrayList<>();
-		try {
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mail","root","Root@2709");
-			stmt = con.prepareStatement("select * from inbox where recepient_email=?");
-=======
 		List<Map<String,Object>> outerList = new ArrayList<>();
 		try {
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mail","root","Root@2709");
 			stmt = con.prepareStatement("select * from inbox where recepientEmail=?");
->>>>>>> 777a2f7 (inbox messages displayed successfully)
 			stmt.setString(1, user_email);
 			rs = stmt.executeQuery();
 			
 			while(rs.next()) {
-<<<<<<< HEAD
-				List<Object> innerList = new ArrayList<>();
-=======
-//				List<Object> innerList = new ArrayList<>();
 				Map<String, Object> inbox = new HashMap<>();
->>>>>>> 777a2f7 (inbox messages displayed successfully)
 				int mid = rs.getInt(1);
 				String sender_email = rs.getString(2);
 				Timestamp sent_date = rs.getTimestamp(3);
 				String subject = rs.getString(4);
 				String body = rs.getString(5);
-				String recepient_email = rs.getString(6);
-<<<<<<< HEAD
-				innerList.add(mid);
-				innerList.add(sender_email);
-				innerList.add(sent_date);
-				innerList.add(subject);
-				innerList.add(body);
-				innerList.add(recepient_email);
-				outerList.add(innerList);
-=======
-//				innerList.add(mid);
-//				innerList.add(sender_email);
-//				innerList.add(sent_date);
-//				innerList.add(subject);
-//				innerList.add(body);
-//				innerList.add(recepient_email);
-//				outerList.add(innerList);
-				
+				String recepient_email = rs.getString(6);	
 				inbox.put("mid",mid);
 				inbox.put("sender_email",sender_email);
 				inbox.put("sent_date",sent_date);
@@ -164,7 +129,6 @@ public class db {
 				inbox.put("body",body);
 				inbox.put("recepient_email",recepient_email);
 				outerList.add(inbox);
->>>>>>> 777a2f7 (inbox messages displayed successfully)
 			}
 			
 			return outerList;
@@ -175,6 +139,76 @@ public class db {
 			stmt.close();
 		}
 		return outerList;
+	}
+	
+	@SuppressWarnings("finally")
+	public List getSentInboxMessages(String user_email) throws SQLException {
+		List<Map<String,Object>> outerList = new ArrayList<>();
+		try {
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mail","root","Root@2709");
+			stmt = con.prepareStatement("select * from inbox where senderName=?");
+			stmt.setString(1, user_email);
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				Map<String, Object> inbox = new HashMap<>();
+				int mid = rs.getInt(1);
+				String sender_email = rs.getString(2);
+				Timestamp sent_date = rs.getTimestamp(3);
+				String subject = rs.getString(4);
+				String body = rs.getString(5);
+				String recepient_email = rs.getString(6);	
+				inbox.put("mid",mid);
+				inbox.put("sender_email",sender_email);
+				inbox.put("sent_date",sent_date);
+				inbox.put("subject",subject);
+				inbox.put("body",body);
+				inbox.put("recepient_email",recepient_email);
+				outerList.add(inbox);
+			}
+			
+			return outerList;
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			con.close();
+			stmt.close();
+		}
+		return outerList;
+	}
+	
+	@SuppressWarnings("finally")
+	public Map getMessage(int mid) throws SQLException {
+		Map<String, Object> msg = new HashMap<>();
+		try {
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mail","root","Root@2709");
+			stmt = con.prepareStatement("select * from message where mid=?");
+			stmt.setInt(1, mid);
+			rs = stmt.executeQuery();
+			
+			if(rs.next()) {
+
+				String sender_email = rs.getString(2);
+				Timestamp sent_date = rs.getTimestamp(3);
+				String subject = rs.getString(4);
+				String body = rs.getString(5);
+				String recepient_email = rs.getString(6);	
+				msg.put("mid",mid);
+				msg.put("sender_email",sender_email);
+				msg.put("sent_date",sent_date);
+				msg.put("subject",subject);
+				msg.put("body",body);
+				msg.put("recepient_email",recepient_email);
+			}
+			
+			return msg;
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			con.close();
+			stmt.close();
+		}
+		return msg;
 	}
 	
 }
