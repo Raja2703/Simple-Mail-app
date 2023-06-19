@@ -22,9 +22,9 @@
 			<a href="compose.jsp" class="text-xl border border-black rounded-xl py-2 px-4">+ Compose</a>
 			
 			<ul class="leading-6 mt-4">
-				<li><a href="inbox.jsp" class="text-lg pl-2 pr-36 py-1 hover:rounded-lg hover:bg-slate-200">Inbox</a></li>
+				<li><a href="getInboxMessages" class="text-lg pl-2 pr-36 py-1 hover:rounded-lg hover:bg-slate-200">Inbox</a></li>
 				<li><a href="getSentInbox" class="text-lg pl-2 pr-36 py-1 hover:rounded-lg hover:bg-slate-200">Sent</a></li>
-				<li><a href="trash.jsp" class="text-lg pl-2 pr-36 py-1 hover:rounded-lg hover:bg-slate-200">Trash</a></li>
+				<li><a href="getTrashInbox" class="text-lg pl-2 pr-36 py-1 hover:rounded-lg hover:bg-slate-200">Trash</a></li>
 			</ul>
 		</div>
 		
@@ -45,18 +45,20 @@
 						String body = (String) inboxMsg.get("body");
 						String recepient_email = (String) inboxMsg.get("recepient_email");
 				%>
-				<button class="w-full p-2 border-b border-gray-300 bg-zinc-200 flex" type="submit" value=<%=mid %> name="btn">
+				<div class="flex border-b border-gray-300 bg-zinc-200">
+				<button class="w-full p-2 flex" type="submit" value=<%=mid %> name="btn">
 					<p class="w-25% mr-4"><%=sender_email %></p>
 					<p class="w-70% mx-4"><%=subject %> - <%=body.substring(0,30) %>  .......</p>
 					<div class="w-5% flex-auto text-end">
 						<p class="inline-block"><%=str_date %></p>
 					</div>
 				</button>
-				<button type="submit" value=<%=mid %> name="deleteBtn">
-						<svg formaction="delete" class="inline-block w-7 h-7 hover:bg-red-500 p-1 rounded-lg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+				<button class="inline-block" type="submit" value=<%=mid %> name="deleteBtn">
+						<svg class="inline-block w-7 h-7 hover:bg-red-500 p-1 rounded-lg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
   							<path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
 						</svg>
 				</button>
+				</div>
 				<% } %>
 			</ul>
 		</form>

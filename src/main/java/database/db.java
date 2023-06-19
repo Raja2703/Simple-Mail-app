@@ -175,6 +175,42 @@ public class db {
 	}
 	
 	@SuppressWarnings("finally")
+	public List getTrashedInboxMessages(String user_email) throws SQLException {
+		List<Map<String,Object>> outerList = new ArrayList<>();
+		try {
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mail","root","Root@2709");
+			stmt = con.prepareStatement("select * from trash where deletedFromUser=?");
+			stmt.setString(1, user_email);
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				Map<String, Object> inbox = new HashMap<>();
+				int mid = rs.getInt(2);
+				String sender_email = rs.getString(3);
+				Timestamp sent_date = rs.getTimestamp(4);
+				String subject = rs.getString(5);
+				String body = rs.getString(6);
+				String recepient_email = rs.getString(7);	
+				inbox.put("mid",mid);
+				inbox.put("sender_email",sender_email);
+				inbox.put("sent_date",sent_date);
+				inbox.put("subject",subject);
+				inbox.put("body",body);
+				inbox.put("recepient_email",recepient_email);
+				outerList.add(inbox);
+			}
+			
+			return outerList;
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			con.close();
+			stmt.close();
+		}
+		return outerList;
+	}
+	
+	@SuppressWarnings("finally")
 	public Map getMessage(int mid) throws SQLException {
 		Map<String, Object> msg = new HashMap<>();
 		try {

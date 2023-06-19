@@ -20,6 +20,12 @@
 		<description></description>
 		<servlet-class>message.getMessageServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>getTrashInbox</servlet-name>
+		<display-name>getTrashInbox</display-name>
+		<description></description>
+		<servlet-class>message.getTrashInbox</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>getMessage</servlet-name>
 		<url-pattern>/getMessage</url-pattern>
@@ -31,6 +37,10 @@
 	<servlet-mapping>
 		<servlet-name>getMessageServlet</servlet-name>
 		<url-pattern>/getMessageServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>getTrashInbox</servlet-name>
+		<url-pattern>/getTrashInbox</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
