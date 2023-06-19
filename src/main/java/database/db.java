@@ -69,26 +69,23 @@ public class db {
 		try {
 			int mid = (int)(Math.random() * 50 + 1);
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mail","root","Root@2709");
-			ps1 = con.prepareStatement("insert into message values(?,?,?,?,?,?);");
+			ps1 = con.prepareStatement("insert into message(mid,senderName,sent_date,subject,body,recepientEmail) values(?,?,?,?,?,?);");
 			ps1.setInt(1, mid);
 			ps1.setString(2, senderName);
-			ps1.setString(3, recepientEmail);
-			ps1.setTimestamp(4, sent_date);
-			ps1.setString(5, subject);
-			ps1.setString(6, body);
 			ps1.setTimestamp(3, sent_date);
 			ps1.setString(4, subject);
 			ps1.setString(5, body);
 			ps1.setString(6, recepientEmail);
 			ps1.addBatch();
 			
-			ps2 = con.prepareStatement("insert into inbox values(?,?,?,?,?,?);");
+			ps2 = con.prepareStatement("insert into inbox(mid,senderName,sent_date,subject,body,recepientEmail,isTrashed) values(?,?,?,?,?,?,?);");
 			ps2.setInt(1, mid);
 			ps2.setString(2, senderName);
 			ps2.setTimestamp(3, sent_date);
 			ps2.setString(4, subject);
 			ps2.setString(5, body);
 			ps2.setString(6, recepientEmail);
+			ps2.setString(7, "false");
 			ps2.addBatch();
 			
 			ps1.executeBatch();
@@ -110,7 +107,7 @@ public class db {
 		List<Map<String,Object>> outerList = new ArrayList<>();
 		try {
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mail","root","Root@2709");
-			stmt = con.prepareStatement("select * from inbox where recepientEmail=?");
+			stmt = con.prepareStatement("select * from inbox where recepientEmail=? and isTrashed=false");
 			stmt.setString(1, user_email);
 			rs = stmt.executeQuery();
 			
@@ -211,4 +208,59 @@ public class db {
 		return msg;
 	}
 	
+	@SuppressWarnings("finally")
+	public void deleteMsg(int mid,String uname) throws SQLException {
+//		boolean isMessageSent = false;
+		try {
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mail","root","Root@2709");
+			stmt = con.prepareStatement("select * from inbox where mid=?");
+			stmt.setInt(1, mid);
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				String senderName = rs.getString("senderName");
+				Timestamp sent_date = rs.getTimestamp("sent_date");
+				String subject = rs.getString("subject");
+				String body = rs.getString("body");
+				String recepientEmail = rs.getString("recepientEmail");
+				
+				insertIntoTrash(uname,mid,senderName,sent_date,subject,body,recepientEmail);
+			}	
+			
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			con.close();
+			stmt.close();
+		}
+	}
+	
+	@SuppressWarnings("finally")
+	public void insertIntoTrash(String deletedFromUser,int mid,String senderName,Timestamp sent_date,String subject,String body,String recepientEmail) throws SQLException {
+//		boolean isMessageSent = false
+		try {
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mail","root","Root@2709");
+			ps1 = con.prepareStatement("insert into trash values(?,?,?,?,?,?,?);");
+			ps1.setString(1, deletedFromUser);
+			ps1.setInt(2, mid);
+			ps1.setString(3, senderName);
+			ps1.setTimestamp(4, sent_date);
+			ps1.setString(5, subject);
+			ps1.setString(6, body);
+			ps1.setString(7, recepientEmail);
+			ps1.addBatch();
+			
+			ps2 = con.prepareStatement("update inbox set isTrashed=true where mid=?");
+			ps2.setInt(1, mid);
+			ps2.addBatch();
+			
+			ps1.executeBatch();
+			ps2.executeBatch();
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			con.close();
+			ps1.close();
+			ps2.close();
+		}
+	}
 }

@@ -22,7 +22,7 @@
 			<a href="compose.jsp" class="text-xl border border-black rounded-xl py-2 px-4">+ Compose</a>
 			
 			<ul class="leading-6 mt-4">
-				<li><a href="inbox.jsp" class="text-lg pl-2 pr-36 py-1 hover:rounded-lg hover:bg-slate-200">Inbox</a></li>
+				<li><a href="getInboxMessages" class="text-lg pl-2 pr-36 py-1 hover:rounded-lg hover:bg-slate-200">Inbox</a></li>
 				<li><a href="sent.jsp" class="text-lg pl-2 pr-36 py-1 hover:rounded-lg hover:bg-slate-200">Sent</a></li>
 				<li><a href="trash.jsp" class="text-lg pl-2 pr-36 py-1 hover:rounded-lg hover:bg-slate-200">Trash</a></li>
 			</ul>
