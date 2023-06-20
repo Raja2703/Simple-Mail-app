@@ -13,7 +13,7 @@
 	<form action="Compose" method="post" class="border">
 		<div class="flex justify-between py-2 px-2 bg-blue-100">
 			<h3>New Message</h3>
-			<a href="inbox.jsp" class="hover:cursor-pointer">x</a>
+			<a href="getInboxMessages" class="hover:cursor-pointer">x</a>
 		</div>
 		
 		<div>

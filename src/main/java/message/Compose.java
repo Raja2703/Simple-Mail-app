@@ -31,10 +31,10 @@ public class Compose extends HttpServlet {
 		try {
 			boolean isMessageSent = db.insertMail(senderName,recepient_email,sent_date,subject,body);
 			if(isMessageSent) {
-				response.sendRedirect("inbox.jsp");
+				response.sendRedirect("getInboxMessages");
 			}
 			else
-				response.sendRedirect("login.jsp");
+				response.sendRedirect("compose.jsp");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
