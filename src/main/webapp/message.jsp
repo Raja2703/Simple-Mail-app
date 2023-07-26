@@ -16,10 +16,10 @@
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
-	<div class="flex w-100% bg-zinc-100">
+	<div class="flex w-100% bg-purple-200">
 		<!-- menu -->
 		<div class="w-2/12 px-3 py-6">
-			<a href="compose.jsp" class="text-xl border border-black rounded-xl py-2 px-4">+ Compose</a>
+			<a href="compose.jsp" class="text-xl text-white border border-black rounded-xl py-2 px-4 bg-purple-400">+ Compose</a>
 			
 			<ul class="leading-6 mt-4">
 				<li><a href="getInboxMessages" class="text-lg pl-2 pr-36 py-1 hover:rounded-lg hover:bg-slate-200">Inbox</a></li>
@@ -29,7 +29,7 @@
 		</div>
 		
 		<!-- message -->
-		<div class="ml-2 w-10/12 h-screen border-2 rounded-md mt-5 mr-3 bg-white">
+		<div class="ml-2 w-10/12 h-screen border-2 rounded-md mt-5 mr-3 bg-purple-100">
 			<div>
 				<%
 					HttpSession sessionObj = request.getSession();

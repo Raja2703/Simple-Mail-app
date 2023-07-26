@@ -16,18 +16,18 @@
   <!-- output tailwindcss link -->
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-black text-smoke w-full h-screen bg-slate-300 flex justify-center items-center">
+<body class="bg-black text-smoke w-full h-screen bg-purple-300 flex justify-center items-center">
   <form action="login" method="post" class="w-full h-full flex justify-center items-center text-center">
 
     <div class="form flex flex-col justify-center items-center w-min">
-      <h1 class="mb-2.5 text-2xl text-black font-medium">Login to your account</h1>  
+      <h1 class="mb-5 text-2xl text-purple-600 font-medium">Login to your account</h1>  
       <input type="email" class=" px-4 py-1 w-80 rounded my-1 shadow-md text-black outline-none bg-slate-100 border :border-gray-300" placeholder="your email id" name="email">
       <input type="password" class=" px-4 py-1 w-80 rounded my-2 shadow-md text-black outline-none bg-slate-100 :border :border-gray-300" placeholder="password" name="pass">
   
-      <button type="submit" class="w-80 rounded px-5 py-1 mt-2 mb-5 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 from-indigo-400 via-purple-400 to-pink-400 text-white">LOGIN</button>
+      <button type="submit" class="w-80 rounded px-5 py-1 mt-2 mb-5 bg-purple-500 text-white">LOGIN</button>
       <div class="w-80 flex justify-between mb-1">
-        <a href='signUp.jsp' class="text-gray-500 text-black">Create new account</a>
-        <a href='#' class="text-gray-500 text-black">Forgot password</a>
+        <a href='signUp.jsp' class="text-gray-500 text-purple-600">Create new account</a>
+        <a href='#' class="text-gray-500 text-purple-600">Forgot password</a>
       </div>
     </div>
   </form>

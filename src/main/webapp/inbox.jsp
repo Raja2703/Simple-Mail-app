@@ -16,20 +16,20 @@
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
-	<div class="flex w-100% bg-zinc-100">
+	<div class="flex w-100% bg-purple-200">
 		<!-- menu -->
 		<div class="w-2/12 px-3 py-6">
-			<a href="compose.jsp" class="text-xl border border-black rounded-xl py-2 px-4">+ Compose</a>
+			<a href="compose.jsp" class="bg-purple-400 text-white text-xl border border-black rounded-xl py-2 px-4">+ Compose</a>
 			
 			<ul class="leading-6 mt-4">
-				<li><a href="getInboxMessages" class="text-lg pl-2 pr-36 py-1 hover:rounded-lg hover:bg-slate-200">Inbox</a></li>
-				<li><a href="getSentInbox" class="text-lg pl-2 pr-36 py-1 hover:rounded-lg hover:bg-slate-200">Sent</a></li>
-				<li><a href="getTrashInbox" class="text-lg pl-2 pr-36 py-1 hover:rounded-lg hover:bg-slate-200">Trash</a></li>
+				<li><a href="getInboxMessages" class="text-lg pl-2 pr-36 py-1 hover:rounded-lg hover:bg-purple-300">Inbox</a></li>
+				<li><a href="getSentInbox" class="text-lg pl-2 pr-36 py-1 hover:rounded-lg hover:bg-purple-300">Sent</a></li>
+				<li><a href="getTrashInbox" class="text-lg pl-2 pr-36 py-1 hover:rounded-lg hover:bg-purple-300">Trash</a></li>
 			</ul>
 		</div>
 		
 		<!-- inbox -->
-		<form class="ml-2 w-10/12 h-screen border-2 rounded-md mt-5 mr-3 bg-white" action="getMessageServlet" method="post">
+		<form class="ml-2 w-10/12 h-screen border-2 rounded-md mt-0 mr-0 bg-purple-100" action="getMessageServlet" method="post">
 			<ul>
 				<%
 					HttpSession sessionObj = request.getSession();
@@ -45,7 +45,7 @@
 						String body = (String) inboxMsg.get("body");
 						String recepient_email = (String) inboxMsg.get("recepient_email");
 				%>
-				<div class="flex border-b border-gray-300 bg-zinc-200">
+				<div class="flex border-b border-gray-300 bg-purple-100 hover:bg-purple-200">
 				<button class="w-full p-2 flex" type="submit" value=<%=mid %> name="btn">
 					<p class="w-25% mr-4"><%=sender_email %></p>
 					<p class="w-70% mx-4"><%=subject %> - <%=body.substring(0,30) %>  .......</p>
