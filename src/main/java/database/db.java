@@ -1,4 +1,4 @@
-package database;
+	package database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -67,7 +67,7 @@ public class db {
 	public boolean insertMail(String senderName,String recepientEmail,Timestamp sent_date,String subject,String body) throws SQLException {
 		boolean isMessageSent = false;
 		try {
-			int mid = (int)(Math.random() * 50 + 1);
+			int mid = (int)(Math.random() * 1000 + 1);
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mail","root","Root@2709");
 			ps1 = con.prepareStatement("insert into message(mid,senderName,sent_date,subject,body,recepientEmail) values(?,?,?,?,?,?);");
 			ps1.setInt(1, mid);

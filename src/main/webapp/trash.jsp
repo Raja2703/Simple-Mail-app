@@ -44,10 +44,11 @@
 						String subject = (String) inboxMsg.get("subject");
 						String body = (String) inboxMsg.get("body");
 						String recepient_email = (String) inboxMsg.get("recepient_email");
+						String subStrBody = body.length() > 28 ? body.substring(0, 27)+" ......." : body;
 				%>
 				<button class="w-full p-2 border-b border-gray-300 bg-purple-100 hover:bg-purple-200 flex" type="submit" value=<%=mid %> name="btn">
 					<p class="w-25% mr-4"><%=sender_email %></p>
-					<p class="w-70% mx-4"><%=subject %> - <%=body.substring(0,30) %>  .......</p>
+					<p class="w-70% mx-4"><%=subject %> - <%=subStrBody%></p>
 					<p class="w-5% flex-auto text-end"><%=str_date %></p>
 				</button>
 				<% } %>
