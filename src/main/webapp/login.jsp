@@ -27,7 +27,6 @@
       <button type="submit" class="w-80 rounded px-5 py-1 mt-2 mb-5 bg-purple-500 text-white">LOGIN</button>
       <div class="w-80 flex justify-between mb-1">
         <a href='signUp.jsp' class="text-gray-500 text-purple-600">Create new account</a>
-        <a href='#' class="text-gray-500 text-purple-600">Forgot password</a>
       </div>
     </div>
   </form>

@@ -33,6 +33,5 @@
       </div>
     </div>
   </form>
-  <script src="app.js"></script>
 </body>
 </html>

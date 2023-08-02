@@ -32,6 +32,12 @@
 		<description></description>
 		<servlet-class>creds.logout</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>forgot</servlet-name>
+		<display-name>forgot</display-name>
+		<description></description>
+		<servlet-class>creds.forgot</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>getMessage</servlet-name>
 		<url-pattern>/getMessage</url-pattern>
@@ -51,6 +57,10 @@
 	<servlet-mapping>
 		<servlet-name>logout</servlet-name>
 		<url-pattern>/logout</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>forgot</servlet-name>
+		<url-pattern>/forgot</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
