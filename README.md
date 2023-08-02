@@ -14,4 +14,4 @@ limitations:
 requirements:
 
 jar files:
-1) mysql connector jar<a href="">link</a>
+1) mysql connector jar<a href="https://github.com/Raja2703/Simple-Mail-app/blob/main/mysql-connector-j-8.0.32.jar">link</a>
